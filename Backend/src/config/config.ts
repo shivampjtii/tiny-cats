@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import type { IConfig } from "../types/config.type.ts";
+import type { IConfig } from "../types/config.types.ts";
 dotenv.config();
 
 // interface IConfig {
