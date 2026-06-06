@@ -1,8 +1,9 @@
 import app from "./app.ts";
 import config from "./config/config.ts";
+import connecToDB from "./config/database.ts";
 
-const PORT = config.PORT || 5000;
+connecToDB();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`);
 });
