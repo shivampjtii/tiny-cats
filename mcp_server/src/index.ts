@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { recommendCatsTool } from "./tools/recommendCats.tools.ts";
+import { getAllCatsTool, recommendCatsTool } from "./tools/recommendCats.tools.ts";
 
 // Create server instance
 const server = new McpServer({
@@ -18,6 +18,22 @@ server.registerTool("recommend_cats", {
     }
 }, async ({kidsFriendly, appartmentFriendly})=>{
     const result = await recommendCatsTool(kidsFriendly, appartmentFriendly);
+
+    return {
+        content:[
+            {
+                type: "text",
+                text: JSON.stringify(result)
+            }
+        ]
+    }
+})
+
+server.registerTool("get_all_cats", {
+    title:"all cats",
+    description: "Cats data.",
+}, async ()=>{
+    const result = await getAllCatsTool();
 
     return {
         content:[
